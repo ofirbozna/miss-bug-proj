@@ -2,6 +2,7 @@ import { utilService } from './util.service.js'
 import { storageService } from './async-storage.service.js'
 
 const STORAGE_KEY = 'bugs'
+const BASE_URL = '/api/bug/'
 
 _createBugs()
 
@@ -14,41 +15,47 @@ export const bugService = {
 }
 
 function query(filterBy) {
-    return storageService.query(STORAGE_KEY)
-    .then(bugs => {
+    return axios.get(BASE_URL)
+        .then(res => res.data)
+        .then(bugs => {
 
-        if (filterBy.txt) {
-            const regExp = new RegExp(filterBy.txt, 'i')
-            bugs = bugs.filter(bug => regExp.test(bug.title))
-        }
+            if (filterBy.txt) {
+                const regExp = new RegExp(filterBy.txt, 'i')
+                bugs = bugs.filter(bug => regExp.test(bug.title))
+            }
 
-        if (filterBy.minSeverity) {
-            bugs = bugs.filter(bug => bug.severity >= filterBy.minSeverity)
-        }
+            if (filterBy.minSeverity) {
+                bugs = bugs.filter(bug => bug.severity >= filterBy.minSeverity)
+            }
 
-        return bugs
-    })
+            return bugs
+        })
 }
 
 function getById(bugId) {
-    return storageService.get(STORAGE_KEY, bugId)
+    return axios.get(BASE_URL + bugId)
+        .then(res => res.data)
 }
 
 function remove(bugId) {
-    return storageService.remove(STORAGE_KEY, bugId)
+    return axios.get(BASE_URL + bugId + '/remove')
+        .then(res => res.data)
 }
 
 function save(bug) {
-    if (bug._id) {
-        return storageService.put(STORAGE_KEY, bug)
-    } else {
-        return storageService.post(STORAGE_KEY, bug)
-    }
+    const url = BASE_URL + 'save'
+    let queryParams = `?title=${bug.title}&description=${bug.description}&severity=${bug.severity}`
+    if (bug._id) queryParams += `&_id=${bug._id}`
+    return axios.get(url + queryParams)
+        .then(res => res.data)
+        .catch(err => {
+            console.log('err:', err)
+        })
 }
 
 function _createBugs() {
     let bugs = utilService.loadFromStorage(STORAGE_KEY)
-    if (bugs && bugs.length > 0) return 
+    if (bugs && bugs.length > 0) return
 
     bugs = [
         {
