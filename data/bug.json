@@ -1,5 +1,12 @@
 [
     {
+        "_id": "Smmrf",
+        "title": "Bug 1742760127208",
+        "description": "bla",
+        "severity": 3,
+        "createdAt": 1742760131964
+    },
+    {
         "_id": "1NF1N1T3",
         "title": "Infinite Loop Detected",
         "description": "infinit loop",
