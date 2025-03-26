@@ -1,11 +1,17 @@
 [
     {
-        "_id": "Smmrf",
-        "title": "Bug 1742760127208",
-        "description": "bla",
+        "title": "Bug 1743006971034",
+        "severity": 5,
+        "description": "bug",
+        "_id": "X1ZJJ",
+        "createdAt": 1743006983898
+    },
+    {
+        "title": "Bug 1743006674511",
+        "description": "OFIR",
         "severity": 3,
-        "createdAt": 1742760131964,
-        "labels": ["critical", "need-CR", "dev-branch"]
+        "createdAt": 1743006680354,
+        "_id": "1y8c6"
     },
     {
         "_id": "1NF1N1T3",
@@ -13,7 +19,11 @@
         "description": "infinit loop",
         "severity": 4,
         "createdAt": 1542107359454,
-        "labels": ["urgent", "high-risk", "performance"]
+        "labels": [
+            "urgent",
+            "high-risk",
+            "performance"
+        ]
     },
     {
         "_id": "K3YB0RD",
@@ -21,7 +31,10 @@
         "description": "404 Coffee Not Found",
         "severity": 2,
         "createdAt": 1542107359454,
-        "labels": ["low-priority", "UI"]
+        "labels": [
+            "low-priority",
+            "UI"
+        ]
     },
     {
         "_id": "G0053",
@@ -29,6 +42,10 @@
         "description": "Unexpected Response",
         "severity": 1,
         "createdAt": 1542107359454,
-        "labels": ["minor", "backend", "needs-review"]
+        "labels": [
+            "minor",
+            "backend",
+            "needs-review"
+        ]
     }
 ]
