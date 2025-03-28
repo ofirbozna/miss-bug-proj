@@ -3,6 +3,7 @@ import fs from 'fs'
 
 
 const bugs = utilService.readJsonFile('data/bug.json')
+const PAGE_SIZE = 5
 
 export const bugService = {
     query,
@@ -20,6 +21,10 @@ function query(filterBy) {
             }
             if (filterBy.minSeverity) {
                 bugs = bugs.filter(bug => bug.severity >= filterBy.minSeverity)
+            }
+            if (filterBy.pageIdx !== undefined && filterBy.pageIdx !== '' && filterBy.pageIdx !== null) {
+                const startIdx = filterBy.pageIdx * PAGE_SIZE
+                bugs = bugs.slice(startIdx, startIdx + PAGE_SIZE)
             }
             return bugs
         })

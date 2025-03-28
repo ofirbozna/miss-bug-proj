@@ -1,5 +1,26 @@
 [
     {
+        "title": "Bug 1743168336801",
+        "severity": 5,
+        "description": "cannot find bugs",
+        "_id": "QubLS",
+        "createdAt": 1743168350905
+    },
+    {
+        "title": "Bug 1743168324469",
+        "severity": 2,
+        "description": "cannot load img",
+        "_id": "iTdwo",
+        "createdAt": 1743168335192
+    },
+    {
+        "title": "Bug 1743168301309",
+        "severity": 4,
+        "description": "no response",
+        "_id": "sHMDc",
+        "createdAt": 1743168322879
+    },
+    {
         "title": "Bug 1743006971034",
         "severity": 5,
         "description": "bug",

@@ -12,8 +12,9 @@ app.get('/', (req, res) => res.send('Hello there!'))
 
 app.get('/api/bug', (req, res) => {
     const filterBy = {
-        txt:req.query.txt,
-        minSeverity: req.query.minSeverity
+        txt: req.query.txt || '',
+        minSeverity: +req.query.minSeverity || 0,
+        pageIdx: req.query.pageIdx
     }
     bugService.query(filterBy)
         .then(bugs => res.send(bugs))
@@ -24,7 +25,7 @@ app.get('/api/bug', (req, res) => {
 })
 
 app.post('/api/bug', (req, res) => {
-    const bugToSave =req.body
+    const bugToSave = req.body
 
     bugService.save(bugToSave)
         .then(bug => res.send(bug))
@@ -36,7 +37,7 @@ app.post('/api/bug', (req, res) => {
 })
 
 app.put('/api/bug/:bugId', (req, res) => {
-    const bugToSave =req.body
+    const bugToSave = req.body
 
     bugService.save(bugToSave)
         .then(bug => res.send(bug))

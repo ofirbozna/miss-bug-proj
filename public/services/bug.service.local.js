@@ -14,8 +14,8 @@ export const bugService = {
     getDefaultFilter
 }
 
-function query(filterBy={}) {
-    return axios.get(BASE_URL,{params: filterBy})
+function query(filterBy = {}) {
+    return axios.get(BASE_URL, { params: filterBy })
         .then(res => res.data)
 }
 
@@ -75,5 +75,5 @@ function _createBugs() {
 }
 
 function getDefaultFilter() {
-    return { txt: '', minSeverity: 0 }
+    return { txt: '', minSeverity: 0, pageIdx: 0 }
 }
