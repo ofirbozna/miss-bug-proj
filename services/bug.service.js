@@ -11,8 +11,18 @@ export const bugService = {
     save
 }
 
-function query() {
+function query(filterBy) {
     return Promise.resolve(bugs)
+        .then(bugs => {
+            if (filterBy.txt) {
+                const regExp = new RegExp(filterBy.txt, 'i')
+                bugs = bugs.filter(bug => regExp.test(bug.title))
+            }
+            if (filterBy.minSeverity) {
+                bugs = bugs.filter(bug => bug.severity >= filterBy.minSeverity)
+            }
+            return bugs
+        })
 }
 
 function getBugById(bugId) {
