@@ -14,8 +14,8 @@ export const bugService = {
     getDefaultFilter
 }
 
-function query(filterBy = {}) {
-    return axios.get(BASE_URL, { params: filterBy })
+function query(filterBy = {}, sortBy = {}) {
+    return axios.get(BASE_URL, { params: {...filterBy, ...sortBy }})
         .then(res => res.data)
 }
 

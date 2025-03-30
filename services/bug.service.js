@@ -12,9 +12,12 @@ export const bugService = {
     save
 }
 
-function query(filterBy) {
+function query(filterBy, sortBy) {
     return Promise.resolve(bugs)
         .then(bugs => {
+            console.log('filter', filterBy)
+            console.log('sort', sortBy)
+
             if (filterBy.txt) {
                 const regExp = new RegExp(filterBy.txt, 'i')
                 bugs = bugs.filter(bug => regExp.test(bug.title))
@@ -25,6 +28,20 @@ function query(filterBy) {
             if (filterBy.pageIdx !== undefined && filterBy.pageIdx !== '' && filterBy.pageIdx !== null) {
                 const startIdx = filterBy.pageIdx * PAGE_SIZE
                 bugs = bugs.slice(startIdx, startIdx + PAGE_SIZE)
+            }
+
+            if (sortBy.sortField === 'severity' || sortBy.sortField === 'createdAt') {
+                if(sortBy.sortDir === 1){
+                bugs.sort((bug1, bug2) => bug1[sortBy.sortField] - bug2[sortBy.sortField])
+                }else{
+                    bugs.sort((bug1, bug2) => bug2[sortBy.sortField] - bug1[sortBy.sortField])
+                }
+            } else if (sortBy.sortField === 'title') {
+                if(sortBy.sortDir === 1){
+                bugs.sort((bug1, bug2) => bug1.title.localeCompare(bug2.title))
+                }else{
+                    bugs.sort((bug1, bug2) => bug2.title.localeCompare(bug1.title))   
+                }
             }
             return bugs
         })
