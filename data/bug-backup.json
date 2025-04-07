@@ -1,10 +1,58 @@
 [
     {
-        "_id": "abc123",
-        "title": "Cannot save a new bug",
-        "description": "problem when clicking Save",
+        "title": "Bug 1743168336801",
+        "severity": 5,
+        "description": "cannot find bugs",
+        "_id": "QubLS",
+        "createdAt": 1743168350905,
+        "creator": {
+            "_id": "u101",
+            "fullname": "Puki Ja"
+        }
+    },
+    {
+        "title": "Bug 1743168324469",
+        "severity": 2,
+        "description": "cannot load img",
+        "_id": "iTdwo",
+        "createdAt": 1743168335192,
+        "creator": {
+            "_id": "u102",
+            "fullname": "shuki va"
+        }
+    },
+    {
+        "title": "Bug 1743168301309",
+        "severity": 4,
+        "description": "no response",
+        "_id": "sHMDc",
+        "createdAt": 1743168322879,
+        "creator": {
+            "_id": "u103",
+            "fullname": "juki ga"
+        }
+    },
+    {
+        "title": "Bug 1743006971034",
+        "severity": 5,
+        "description": "bug",
+        "_id": "X1ZJJ",
+        "createdAt": 1743006983898,
+        "creator": {
+            "_id": "u102",
+            "fullname": "shuki va"
+        }
+    },
+    {
+        "title": "Bug 1743006674511",
+        "description": "OFIR",
         "severity": 3,
-        "createdAt": 1542107359454
+        "createdAt": 1743006680354,
+        "_id": "1y8c6",
+        "creator": {
+            "_id": "u105",
+            "fullname": "muki ma"
+        }
     },
     {
         "_id": "1NF1N1T3",
@@ -12,7 +60,15 @@
         "description": "infinit loop",
         "severity": 4,
         "createdAt": 1542107359454,
-        "labels": ["urgent", "high-risk", "performance"]
+        "labels": [
+            "urgent",
+            "high-risk",
+            "performance"
+        ],
+        "creator": {
+            "_id": "u105",
+            "fullname": "muki ma"
+        }
     },
     {
         "_id": "K3YB0RD",
@@ -20,7 +76,14 @@
         "description": "404 Coffee Not Found",
         "severity": 2,
         "createdAt": 1542107359454,
-        "labels": ["low-priority", "UI"]
+        "labels": [
+            "low-priority",
+            "UI"
+        ],
+        "creator": {
+            "_id": "u104",
+            "fullname": "buki ba"
+        }
     },
     {
         "_id": "G0053",
@@ -28,7 +91,14 @@
         "description": "Unexpected Response",
         "severity": 1,
         "createdAt": 1542107359454,
-        "labels": ["minor", "backend", "needs-review"]
+        "labels": [
+            "minor",
+            "backend",
+            "needs-review"
+        ],
+        "creator": {
+            "_id": "u104",
+            "fullname": "buki ba"
+        }
     }
-    
 ]
