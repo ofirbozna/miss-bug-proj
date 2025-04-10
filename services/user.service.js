@@ -28,7 +28,6 @@ function getByUserName(username) {
 function getById(userId) {
     let user = users.find(user => user._id === userId)
     if (!user) return Promise.reject('User not found!')
-
     user = { ...user }
     delete user.password
     return Promise.resolve(user)
