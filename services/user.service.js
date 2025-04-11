@@ -2,7 +2,7 @@ import fs from 'fs'
 
 import { utilService } from './util.service.js'
 
-const users = utilService.readJsonFile('data/users.json')
+let users = utilService.readJsonFile('data/users.json')
 export const userService = {
     add,
     query,
@@ -35,7 +35,7 @@ function getById(userId) {
 
 function remove(userId) {
     users = users.filter(user => user.userId !== userId)
-    return _saveUsersToFile
+    return _saveUsersToFile()
 }
 
 function add(user) {

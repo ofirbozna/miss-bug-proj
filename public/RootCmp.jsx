@@ -11,12 +11,14 @@ import { AboutUs } from './pages/AboutUs.jsx'
 import { authService } from './services/auth.service.js'
 import { LoginSignup } from './pages/LoginSignup.jsx'
 import { UserDetails } from './pages/UserDetails.jsx'
+import { UserIndex } from './pages/UserIndex.jsx'
 
 
-const { useState } = React
+const { useState} = React
 export function App() {
     const [loggedInUser, setLoggedInUser] = useState(authService.getLoggedInUser())
     console.log(loggedInUser)
+
     return <Router>
         <div className="app-wrapper">
             <UserMsg />
@@ -24,11 +26,12 @@ export function App() {
             <main className="container">
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path="/bug" element={<BugIndex loggedInUser={loggedInUser}/>} />
+                    <Route path="/bug" element={<BugIndex loggedInUser={loggedInUser} />} />
                     <Route path="/bug/:bugId" element={<BugDetails />} />
                     <Route path="/about" element={<AboutUs />} />
                     <Route path="/auth" element={<LoginSignup setLoggedInUser={setLoggedInUser} />} />
-                    <Route path="/user/:userId" element={<UserDetails/>} />
+                    <Route path="/user/:userId" element={<UserDetails />} />
+                    <Route path="user" element={<UserIndex />}></Route>
                 </Routes>
             </main>
             <AppFooter />

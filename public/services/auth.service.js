@@ -10,7 +10,7 @@ export const authService = {
 
 function login({ username, password }) {
     console.log('login', username, password)
-    return axios.post(BASE_URL + 'login', { username, password })
+    return axios.post(BASE_URL + 'login', { username, password})
         .then(res => res.data)
         .then(_setLoggedInUser)
 }
@@ -31,8 +31,8 @@ function getLoggedInUser() {
 }
 
 function _setLoggedInUser(user) {
-    const { _id, fullname } = user
-    const userToSave = { _id, fullname }
+    const { _id, fullname,isAdmin } = user
+    const userToSave = { _id, fullname,isAdmin }
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(userToSave))
     return userToSave
 }

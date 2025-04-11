@@ -50,7 +50,7 @@ app.put('/api/bug/:bugId', (req, res) => {
 
     const bugToSave = req.body
 
-    bugService.save(bugToSave,loggedInUser)
+    bugService.save(bugToSave, loggedInUser)
         .then(bug => res.send(bug))
         .catch(err => {
             loggerService.error('Cannot update bug', err)
@@ -79,7 +79,7 @@ app.delete('/api/bug/:bugId', (req, res) => {
     if (!loggedInUser) return res.status(401).send(`Can't remove car`)
 
     const { bugId } = req.params
-    bugService.remove(bugId,loggedInUser)
+    bugService.remove(bugId, loggedInUser)
         .then(() => res.send('Bug removed'))
         .catch(err => {
             loggerService.error('Cannot remove bug', err)
@@ -103,6 +103,17 @@ app.get('/api/user/:userId', (req, res) => {
         .catch(err => {
             loggerService.error('Cannot get user', err)
             res.status(500).send('Cannot load user')
+        })
+})
+
+app.delete('/api/user/:userId', (req, res) => {
+    const { userId } = req.params
+    console.log(userId)
+    userService.remove(userId)
+        .then(() => res.send('User removed'))
+        .catch(err => {
+            loggerService.error('Cannot remove user', err)
+            res.status(500).send('Cannot remove user')
         })
 })
 
