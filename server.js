@@ -45,9 +45,12 @@ app.post('/api/bug', (req, res) => {
 })
 
 app.put('/api/bug/:bugId', (req, res) => {
+    const loggedInUser = authService.validateToken(req.cookies.loginToken)
+    if (!loggedInUser) return res.status(401).send(`Can't remove car`)
+
     const bugToSave = req.body
 
-    bugService.save(bugToSave)
+    bugService.save(bugToSave,loggedInUser)
         .then(bug => res.send(bug))
         .catch(err => {
             loggerService.error('Cannot update bug', err)
@@ -72,8 +75,11 @@ app.get('/api/bug/:bugId', (req, res) => {
 })
 
 app.delete('/api/bug/:bugId', (req, res) => {
+    const loggedInUser = authService.validateToken(req.cookies.loginToken)
+    if (!loggedInUser) return res.status(401).send(`Can't remove car`)
+
     const { bugId } = req.params
-    bugService.remove(bugId)
+    bugService.remove(bugId,loggedInUser)
         .then(() => res.send('Bug removed'))
         .catch(err => {
             loggerService.error('Cannot remove bug', err)

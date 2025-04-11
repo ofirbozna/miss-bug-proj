@@ -1,3 +1,4 @@
+import { loggerService } from "./logger.service.js"
 import { utilService } from "./util.service.js"
 import fs from 'fs'
 
@@ -31,16 +32,16 @@ function query(filterBy, sortBy) {
             }
 
             if (sortBy.sortField === 'severity' || sortBy.sortField === 'createdAt') {
-                if(sortBy.sortDir === 1){
-                bugs.sort((bug1, bug2) => bug1[sortBy.sortField] - bug2[sortBy.sortField])
-                }else{
+                if (sortBy.sortDir === 1) {
+                    bugs.sort((bug1, bug2) => bug1[sortBy.sortField] - bug2[sortBy.sortField])
+                } else {
                     bugs.sort((bug1, bug2) => bug2[sortBy.sortField] - bug1[sortBy.sortField])
                 }
             } else if (sortBy.sortField === 'title') {
-                if(sortBy.sortDir === 1){
-                bugs.sort((bug1, bug2) => bug1.title.localeCompare(bug2.title))
-                }else{
-                    bugs.sort((bug1, bug2) => bug2.title.localeCompare(bug1.title))   
+                if (sortBy.sortDir === 1) {
+                    bugs.sort((bug1, bug2) => bug1.title.localeCompare(bug2.title))
+                } else {
+                    bugs.sort((bug1, bug2) => bug2.title.localeCompare(bug1.title))
                 }
             }
             return bugs
@@ -53,9 +54,12 @@ function getBugById(bugId) {
     return Promise.resolve(bug)
 }
 
-function save(bugToSave) {
+function save(bugToSave, loggedInUser) {
     if (bugToSave._id) {
         const bugIdx = bugs.findIndex(bug => bug._id === bugToSave.id)
+        if (bugs[bugIdx].creator._id !== loggedInUser._id) {
+            return Promise.reject('Not your car')
+        }
         bugs[bugIdx] = bugToSave
     } else {
         bugToSave._id = utilService.makeId()
@@ -65,9 +69,13 @@ function save(bugToSave) {
     return _saveBugsToFile().then(() => bugToSave)
 }
 
-function remove(bugId) {
+function remove(bugId, loggedInUser) {
     const bugIdx = bugs.findIndex(bug => bug._id === bugId)
     if (bugIdx === -1) return Promise.reject('Cannot remove bug -' + bugId)
+
+    if (bugs[bugIdx].creator._id !== loggedInUser._id) {
+        return Promise.reject('Not your car')
+    }
     bugs.splice(bugIdx, 1)
     return _saveBugsToFile()
 }
